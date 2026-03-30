@@ -20,4 +20,8 @@
     <ProjectReference Include="..\PadelShop.Data.Models\PadelStore.Data.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
