@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Data/">
+    <Project Path="../PadelShop.Data.Models/PadelStore.Data.Models.csproj" />
+    <Project Path="../PadelShop.Data/PadelStore.Data.csproj" />
+  </Folder>
+  <Folder Name="/Web/">
+    <Project Path="../PadelShop.ViewModels/PadelStore.ViewModels.csproj" />
+    <Project Path="PadelStore.csproj" />
+  </Folder>
+</Solution>
