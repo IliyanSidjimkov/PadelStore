@@ -1,0 +1,35 @@
+﻿@using PadelStore.Data.Models
+@model IEnumerable<Brand>
+
+<h2>Brands</h2>
+
+<form asp-action="Create" method="post" class="mb-3">
+    <div class="input-group">
+        <input name="name" class="form-control" placeholder="New brand..." />
+        <button type="submit" class="btn btn-success">Add</button>
+    </div>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th width="150"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var b in Model)
+        {
+            <tr>
+                <td>@b.BrandName</td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@b.Id"
+                           class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

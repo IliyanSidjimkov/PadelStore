@@ -7,12 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.3.9" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PadelShop.Data.Models\PadelStore.Data.Models.csproj" />
-    <ProjectReference Include="..\PadelStore.GCommon\PadelStore.GCommon.csproj" />
+    <ProjectReference Include="..\PadelShop.Data\PadelStore.Data.csproj" />
+    <ProjectReference Include="..\PadelShop.ViewModels\PadelStore.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

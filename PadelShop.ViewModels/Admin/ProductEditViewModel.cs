@@ -1,38 +1,39 @@
-﻿
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PadelStore.Data.Models
+
+namespace PadelStore.ViewModels.Admin
 {
-    using static Common.EntityValidation.Product;
-    public class Product
+    using static PadelStore.GCommon.ViewModelValidation.Product;
+    public class ProductEditViewModel
     {
 
-        [Key]
         public Guid Id { get; set; }
-
         [Required]
         [MaxLength(ProductNameMaxLength)]
+        [MinLength(ProductNameMinLength)]
         public string ProductName { get; set; } = null!;
         [Required]
         [MaxLength(ProductDescriptionMaxLength)]
+        [MinLength(ProductDescriptionMinLength)]
         public string ProductDescription { get; set; } = null!;
-        
+        [Required]
+        [Range(minPrice, maxPrice)]
         public decimal Price { get; set; }
 
         [Required]
         [Url]
         public string ImageUrl { get; set; } = null!;
 
-        [ForeignKey(nameof(Category))]
+        [Required]
         public Guid CategoryId { get; set; }
-        public Category Category { get; set; } = null!;
 
-        [ForeignKey(nameof(Brand))]
+        [Required]
         public Guid BrandId { get; set; }
-        public Brand Brand { get; set; } = null!;
 
-        public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+
+        public IEnumerable<SelectListItem> Categories { get; set; } = new List<SelectListItem>();
+        public IEnumerable<SelectListItem> Brands { get; set; } = new List<SelectListItem>();
     }
 }

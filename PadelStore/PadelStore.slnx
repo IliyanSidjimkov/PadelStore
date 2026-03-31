@@ -4,6 +4,9 @@
     <Project Path="../PadelShop.Data/PadelStore.Data.csproj" />
     <Project Path="../PadelStore.Data.Common/PadelStore.Data.Common.csproj" Id="755434a2-d3bd-4bf8-9568-cbf44a392fae" />
   </Folder>
+  <Folder Name="/Services/">
+    <Project Path="../PadelStrore.Services.Core/PadelStrore.Services.Core.csproj" Id="3a816961-3081-4de3-8d16-e6a49b4408cf" />
+  </Folder>
   <Folder Name="/Web/">
     <Project Path="../PadelShop.ViewModels/PadelStore.ViewModels.csproj" />
     <Project Path="../PadelStore.Web.Infrastructure/PadelStore.Web.Infrastructure.csproj" Id="abed649b-2265-4a89-8945-1658e4d9f7e6" />

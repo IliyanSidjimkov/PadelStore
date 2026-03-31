@@ -2,7 +2,7 @@
 
 namespace PadelStore.Areas.Admin.Controllers
 {
-    public class UserManagment : BaseController
+    public class UserManagment : BaseAdminController
     {
         public IActionResult Index()
         {

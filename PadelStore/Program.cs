@@ -5,6 +5,8 @@ using PadelStore.Data.Models;
 using PadelStore.Data.Seeding;
 using PadelStore.Data.Seeding.Contracts;
 using PadelStore.Web.Infrastructure.Extensions;
+using PadelStrore.Services.Core;
+using PadelStrore.Services.Core.Contracts;
 
 namespace PadelStore
 {
@@ -29,6 +31,10 @@ namespace PadelStore
             })
                 .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ShopDbContext>();
+
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IBrandService, BrandService>();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();

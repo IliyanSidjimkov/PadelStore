@@ -5,7 +5,7 @@ namespace PadelStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public abstract class BaseController : Controller
+    public abstract class BaseAdminController : Controller
     {
       
     }
