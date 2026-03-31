@@ -20,6 +20,8 @@
   <ItemGroup>
     <ProjectReference Include="..\PadelShop.Data\PadelStore.Data.csproj" />
     <ProjectReference Include="..\PadelShop.ViewModels\PadelStore.ViewModels.csproj" />
+    <ProjectReference Include="..\PadelStore.GCommon\PadelStore.GCommon.csproj" />
+    <ProjectReference Include="..\PadelStore.Web.Infrastructure\PadelStore.Web.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PadelStore.Data;
 using PadelStore.Data.Models;
+using PadelStore.Data.Seeding;
+using PadelStore.Data.Seeding.Contracts;
+using PadelStore.Web.Infrastructure.Extensions;
 
 namespace PadelStore
 {
@@ -17,12 +20,14 @@ namespace PadelStore
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+            builder.Services.AddTransient<IIdentitySeeder, IdentitySeeder>();
+
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 ConfigureIdentity(options, builder.Configuration);
 
             })
-                
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ShopDbContext>();
             builder.Services.AddControllersWithViews();
 
@@ -47,6 +52,8 @@ namespace PadelStore
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseRolesSeeder();
 
             app.MapControllerRoute(
                 name: "default",

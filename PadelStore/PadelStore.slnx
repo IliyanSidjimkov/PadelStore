@@ -6,6 +6,8 @@
   </Folder>
   <Folder Name="/Web/">
     <Project Path="../PadelShop.ViewModels/PadelStore.ViewModels.csproj" />
+    <Project Path="../PadelStore.Web.Infrastructure/PadelStore.Web.Infrastructure.csproj" Id="abed649b-2265-4a89-8945-1658e4d9f7e6" />
     <Project Path="PadelStore.csproj" />
   </Folder>
+  <Project Path="../PadelStore.GCommon/PadelStore.GCommon.csproj" Id="4dc8b7c1-c3cd-423f-a2a9-b00667e393be" />
 </Solution>

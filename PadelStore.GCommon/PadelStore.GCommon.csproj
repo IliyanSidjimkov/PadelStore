@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PadelStore.GCommon\PadelStore.GCommon.csproj" />
-  </ItemGroup>
-
 </Project>
