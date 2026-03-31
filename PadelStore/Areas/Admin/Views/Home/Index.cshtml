@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-4">
+
+    <h1 class="mb-4">Admin Panel ⚙️</h1>
+
+    <!-- QUICK ACTIONS -->
+    <div class="row g-4">
+
+        <!-- PRODUCTS -->
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h4>Products</h4>
+                    <p>Manage all products in the store</p>
+
+                    <a asp-area="Admin" asp-controller="AdminProducts" asp-action="Index"
+                           class="btn btn-dark w-100 mb-2">
+                        Manage Products
+                    </a>
+
+                    <a asp-area="Admin" asp-controller="AdminProducts" asp-action="Create"
+                           class="btn btn-outline-dark w-100">
+                        Add Product
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDERS -->
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h4>Orders</h4>
+                    <p>View and approve customer orders</p>
+
+                    <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index"
+                           class="btn btn-primary w-100">
+                        View Orders
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- USERS -->
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h4>Users</h4>
+                    <p>Manage registered users</p>
+
+                    <a asp-area="Admin" asp-controller="AdminUsers" asp-action="Index"
+                           class="btn btn-danger w-100">
+                        Manage Users
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORIES -->
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h4>Categories</h4>
+                    <p>Add and manage categories</p>
+
+                    <a asp-area="Admin" asp-controller="AdminCategories" asp-action="Index"
+                           class="btn btn-success w-100">
+                        Manage Categories
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- BRANDS -->
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h4>Brands</h4>
+                    <p>Add and manage brands</p>
+
+                    <a asp-area="Admin" asp-controller="AdminBrands" asp-action="Index"
+                           class="btn btn-warning w-100">
+                        Manage Brands
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
