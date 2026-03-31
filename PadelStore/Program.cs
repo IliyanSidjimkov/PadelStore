@@ -54,6 +54,7 @@ namespace PadelStore
             app.UseAuthorization();
 
             app.UseRolesSeeder();
+            app.UseAdminUserSeeder();
 
             app.MapControllerRoute(
                 name: "default",

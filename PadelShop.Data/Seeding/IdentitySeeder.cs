@@ -49,9 +49,9 @@ namespace PadelStore.Data.Seeding
 
         public async Task SeedAdminUserAsync()
         {
-            string adminEmail = configuration["UserSeed:AdminAccount:Email"] ??
+            string adminEmail = "admin@admin.bg" ??
                                 throw new InvalidOperationException(AdminUserSeedingEmailNotFoundMessage);
-            string adminPassword = configuration["UserSeed:AdminAccount:Password"] ??
+            string adminPassword = "123456" ??
                                    throw new InvalidOperationException(AdminUserSeedingPasswordNotFoundMessage);
 
             ApplicationUser? adminUser = await userManager.FindByEmailAsync(adminEmail);
@@ -59,6 +59,8 @@ namespace PadelStore.Data.Seeding
             {
                 adminUser = new ApplicationUser
                 {
+                    FirstName = "Admin",
+                    LastName = "Admin",
                     UserName = adminEmail,
                     Email = adminEmail,
                     Birthdate = DateTime.Now.AddYears(-18),
