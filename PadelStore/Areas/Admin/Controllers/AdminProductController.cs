@@ -42,9 +42,20 @@ namespace PadelStore.Areas.Admin.Controllers
                 return View(model);
             }
 
-            await productService.CreateAsync(model);
+            try
+            {
+                await productService.CreateAsync(model);
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                ModelState.AddModelError(string.Empty, "An error occurred while adding product. Please try again.");
+                return View(model);
+            }
+
+           
         }
 
         [HttpGet]
@@ -52,7 +63,10 @@ namespace PadelStore.Areas.Admin.Controllers
         {
             ProductEditViewModel? model = await productService.GetByIdAsync(id);
 
-            if (model == null) return NotFound();
+            if (model == null)
+            {
+                return NotFound();
+            }
 
             model.Categories = await productService.GetCategoriesAsync();
             model.Brands = await productService.GetBrandsAsync();
@@ -70,9 +84,20 @@ namespace PadelStore.Areas.Admin.Controllers
                 return View(model);
             }
 
-            await productService.UpdateAsync(model);
+            try
+            {
+                await productService.UpdateAsync(model);
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                ModelState.AddModelError(string.Empty, "An error occurred while editing the product. Please try again.");
+                return View(model);
+
+            }
+            
         }
 
         public async Task<IActionResult> Delete(Guid id)
@@ -85,7 +110,10 @@ namespace PadelStore.Areas.Admin.Controllers
         {
             ProductDetailsViewModel? model = await productService.GetDetailsAsync(id);
 
-            if (model == null) return NotFound();
+            if (model == null)
+            {
+                return NotFound();
+            }
 
             return View(model);
         }

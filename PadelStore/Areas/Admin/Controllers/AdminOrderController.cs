@@ -17,16 +17,29 @@ namespace PadelStore.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var orders = await orderService.GetAllAsync();
+            IEnumerable<OrderViewModel> orders = await orderService.GetAllAsync();
             return View(orders);
         }
 
         [HttpPost]
         public async Task<IActionResult> ChangeStatus(Guid id, OrderStatus status)
         {
-            await orderService.ChangeStatusAsync(id, status);
+
+            try
+            {
+                await orderService.ChangeStatusAsync(id, status);
 
             return RedirectToAction(nameof(Index));
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                ModelState.AddModelError(string.Empty, "An error occurred while changing order status. Please try again.");
+                return View(status);
+
+            }
+
         }
     }
 }

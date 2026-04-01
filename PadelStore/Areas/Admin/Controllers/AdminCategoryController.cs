@@ -28,8 +28,20 @@ namespace PadelStore.Areas.Admin.Controllers
                 return View("Index", categories);
             }
 
-            await categoryService.CreateAsync(model);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await categoryService.CreateAsync(model);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e);
+                ModelState.AddModelError(string.Empty, "An error occurred while creating category. Please try again.");
+                return View(model);
+            }
+
+            
         }
 
         public async Task<IActionResult> Delete(Guid id)

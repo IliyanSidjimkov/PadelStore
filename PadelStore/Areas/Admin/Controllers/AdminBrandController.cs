@@ -29,10 +29,22 @@ namespace PadelStore.Areas.Admin.Controllers
                 return View("Index", brands);
             }
 
-            await brandService.CreateAsync(model);
+            try
+            {
+                await brandService.CreateAsync(model);
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e);
+                ModelState.AddModelError(string.Empty, "An error occurred while adding a brand. Please try again.");
+                return View(model);
+            }
         }
+
+            
 
         public async Task<IActionResult> Delete(Guid id)
         {

@@ -120,7 +120,10 @@ namespace PadelStrore.Services.Core
         {
             Product? product = await context.Products.FindAsync(model.Id);
 
-            if (product == null) return;
+            if (product == null)
+            {
+                return;
+            }
 
             product.ProductName = model.ProductName;
             product.ProductDescription = model.ProductDescription;

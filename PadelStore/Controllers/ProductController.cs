@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PadelStore.ViewModels.Admin;
 using PadelStrore.Services.Core.Contracts;
 
 namespace PadelStore.Controllers
@@ -15,16 +16,19 @@ namespace PadelStore.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var products = await productService.GetAllAsync();
+            IEnumerable<ProductAllViewModel> products = await productService.GetAllAsync();
             return View(products);
         }
 
         [AllowAnonymous]
         public async Task<IActionResult> Details(Guid id)
         {
-            var model = await productService.GetDetailsAsync(id);
+            ProductDetailsViewModel? model = await productService.GetDetailsAsync(id);
 
-            if (model == null) return NotFound();
+            if (model == null)
+            {
+                return NotFound();
+            }
 
             return View(model);
         }
