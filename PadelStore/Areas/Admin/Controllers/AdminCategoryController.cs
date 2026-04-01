@@ -15,7 +15,7 @@ namespace PadelStore.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var categories = await categoryService.GetAllAsync();
+            IEnumerable<CategoryViewModel> categories = await categoryService.GetAllAsync();
             return View(categories);
         }
 
@@ -24,7 +24,7 @@ namespace PadelStore.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var categories = await categoryService.GetAllAsync();
+                IEnumerable<CategoryViewModel> categories = await categoryService.GetAllAsync();
                 return View("Index", categories);
             }
 

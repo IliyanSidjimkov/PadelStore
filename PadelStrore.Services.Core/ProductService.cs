@@ -19,7 +19,7 @@ namespace PadelStrore.Services.Core
         }
         public async Task CreateAsync(ProductCreateViewModel model)
         {
-            var product = new Product
+            Product product = new Product
             {
                 ProductName = model.ProductName,
                 ProductDescription = model.ProductDescription,
@@ -35,7 +35,7 @@ namespace PadelStrore.Services.Core
 
         public async Task DeleteAsync(Guid id)
         {
-            var product = await context.Products.FindAsync(id);
+            Product? product = await context.Products.FindAsync(id);
 
             if (product != null)
             {
@@ -72,7 +72,7 @@ namespace PadelStrore.Services.Core
 
         public async Task<ProductEditViewModel?> GetByIdAsync(Guid id)
         {
-            var product = await context.Products.FindAsync(id);
+            Product? product = await context.Products.FindAsync(id);
 
             if (product == null) return null;
 
@@ -118,7 +118,7 @@ namespace PadelStrore.Services.Core
 
         public async Task UpdateAsync(ProductEditViewModel model)
         {
-            var product = await context.Products.FindAsync(model.Id);
+            Product? product = await context.Products.FindAsync(model.Id);
 
             if (product == null) return;
 

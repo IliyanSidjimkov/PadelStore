@@ -28,7 +28,7 @@ namespace PadelStrore.Services.Core
 
         public async Task CreateAsync(CategoryViewModel model)
         {
-            var brand = new Category
+            Category brand = new Category
             {
                 CategoryName = model.CategoryName
             };
@@ -39,7 +39,7 @@ namespace PadelStrore.Services.Core
 
         public async Task DeleteAsync(Guid id)
         {
-            var category = await context.Categories.FindAsync(id);
+            Category? category = await context.Categories.FindAsync(id);
 
             if (category != null)
             {

@@ -17,13 +17,13 @@ namespace PadelStore.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var products = await productService.GetAllAsync();
+            IEnumerable<ProductAllViewModel> products = await productService.GetAllAsync();
             return View(products);
         }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var model = new ProductCreateViewModel
+            ProductCreateViewModel model = new ProductCreateViewModel
             {
                 Categories = await productService.GetCategoriesAsync(),
                 Brands = await productService.GetBrandsAsync()
@@ -50,7 +50,7 @@ namespace PadelStore.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var model = await productService.GetByIdAsync(id);
+            ProductEditViewModel? model = await productService.GetByIdAsync(id);
 
             if (model == null) return NotFound();
 
@@ -83,7 +83,7 @@ namespace PadelStore.Areas.Admin.Controllers
 
         public async Task<IActionResult> Details(Guid id)
         {
-            var model = await productService.GetDetailsAsync(id);
+            ProductDetailsViewModel? model = await productService.GetDetailsAsync(id);
 
             if (model == null) return NotFound();
 

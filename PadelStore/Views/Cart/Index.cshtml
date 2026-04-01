@@ -1,0 +1,70 @@
+﻿@using PadelStore.ViewModels
+@model IEnumerable<CartItemViewModel>
+
+<h2>Your Cart 🛒</h2>
+
+<table class="table align-middle">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (CartItemViewModel item in Model)
+        {
+            <tr>
+                <!-- 🖼 Image -->
+                <td>
+                    <img src="@item.ImageUrl" width="80" class="rounded" />
+                </td>
+
+                <!-- 🔗 Product name clickable -->
+                <td>
+                    <a asp-controller="Product"
+                           asp-action="Details"
+                           asp-route-id="@item.ProductId"
+                           class="fw-bold text-decoration-none">
+                        @item.ProductName
+                    </a>
+                </td>
+
+                <td>@item.Price.ToString("C")</td>
+
+                <!-- ➕➖ Quantity -->
+                <td>
+                    <div class="d-flex align-items-center gap-2">
+
+                        <a asp-action="Decrease"
+                               asp-route-id="@item.Id"
+                               class="btn btn-sm btn-danger">
+                            -
+                        </a>
+
+                        <span class="fw-bold">@item.Quantity</span>
+
+                        <a asp-action="Increase"
+                               asp-route-id="@item.Id"
+                               class="btn btn-sm btn-success">
+                            +
+                        </a>
+
+                    </div>
+                </td>
+
+                <!-- ❌ Remove -->
+                <td>
+                    <a asp-action="Remove"
+                           asp-route-id="@item.Id"
+                           class="btn btn-danger btn-sm">
+                        Remove
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

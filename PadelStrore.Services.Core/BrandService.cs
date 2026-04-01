@@ -28,7 +28,7 @@ namespace PadelStrore.Services.Core
 
         public async Task CreateAsync(BrandViewModel model)
         {
-            var brand = new Brand
+            Brand brand = new Brand
             {
                 BrandName = model.Brand
             };
@@ -39,7 +39,7 @@ namespace PadelStrore.Services.Core
 
         public async Task DeleteAsync(Guid id)
         {
-            var brand = await context.Brands.FindAsync(id);
+            Brand? brand = await context.Brands.FindAsync(id);
 
             if (brand != null)
             {

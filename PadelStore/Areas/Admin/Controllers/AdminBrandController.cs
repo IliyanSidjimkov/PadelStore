@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PadelStore.Data.Models;
 using PadelStore.ViewModels.Admin;
 using PadelStrore.Services.Core.Contracts;
 
@@ -15,7 +16,7 @@ namespace PadelStore.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var brands = await brandService.GetAllAsync();
+            IEnumerable<BrandViewModel> brands = await brandService.GetAllAsync();
             return View(brands);
         }
 
@@ -24,7 +25,7 @@ namespace PadelStore.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var brands = await brandService.GetAllAsync();
+                IEnumerable<BrandViewModel> brands = await brandService.GetAllAsync();
                 return View("Index", brands);
             }
 
