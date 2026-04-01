@@ -1,5 +1,6 @@
 ﻿
 
+using PadelStore.Data.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -22,5 +23,6 @@ namespace PadelStore.Data.Models
         public decimal TotalPrice { get; set; }
 
         public  virtual ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
+        public OrderStatus Status { get; set; } = OrderStatus.Pending;
     }
 }

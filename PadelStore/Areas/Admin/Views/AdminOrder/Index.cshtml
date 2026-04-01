@@ -1,0 +1,49 @@
+﻿@using PadelStore.ViewModels.Admin
+@model IEnumerable<OrderViewModel>
+
+<h2>Orders</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>User</th>
+            <th>Total</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (OrderViewModel o in Model)
+        {
+            <tr>
+                <td>@o.Id</td>
+                <td>@o.UserEmail</td>
+                <td>@o.TotalPrice</td>
+                <td>@o.CreatedOn</td>
+                <td>
+                    <span class="badge bg-warning">@o.Status</span>
+                </td>
+
+                <td>
+                    <form asp-action="ChangeStatus" method="post" class="d-flex gap-2">
+
+                        <input type="hidden" name="id" value="@o.Id" />
+
+                        <select name="status" class="form-select form-select-sm">
+                            <option value="Approved">Approve</option>
+                            <option value="Shipped">Ship</option>
+                        </select>
+
+                        <button class="btn btn-sm btn-primary">
+                            Update
+                        </button>
+
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

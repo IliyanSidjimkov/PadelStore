@@ -3,8 +3,6 @@ using PadelStore.Data;
 using PadelStore.Data.Models;
 using PadelStore.ViewModels;
 using PadelStrore.Services.Core.Contracts;
-using System.ComponentModel;
-
 
 namespace PadelStrore.Services.Core
 {
@@ -27,7 +25,7 @@ namespace PadelStrore.Services.Core
             }
             else
             {
-                var item = new CartItem
+                CartItem item = new CartItem
                 {
                     UserId = userId,
                     ProductId = productId,
