@@ -1,14 +1,9 @@
-﻿@using PadelStore.Data.Models
-@model IEnumerable<Category>
+﻿@using PadelStore.ViewModels.Admin
+@model IEnumerable<CategoryViewModel>
 
-<h2>Categories</h2>
+<h2>Brands</h2>
 
-<form asp-action="Create" method="post" class="mb-3">
-    <div class="input-group">
-        <input name="name" class="form-control" placeholder="New category..." />
-        <button type="submit" class="btn btn-success">Add</button>
-    </div>
-</form>
+<partial name="_CreateCategoryPartial" model="new CategoryViewModel()" />
 
 <table class="table table-bordered">
     <thead>
@@ -25,7 +20,7 @@
                 <td>@c.CategoryName</td>
                 <td>
                     <a asp-action="Delete" asp-route-id="@c.Id"
-                       class="btn btn-danger btn-sm">
+                           class="btn btn-danger btn-sm">
                         Delete
                     </a>
                 </td>
@@ -33,3 +28,7 @@
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

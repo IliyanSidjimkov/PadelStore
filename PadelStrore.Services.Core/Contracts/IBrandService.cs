@@ -6,9 +6,9 @@ namespace PadelStrore.Services.Core.Contracts
 {
     public interface IBrandService
     {
-        Task<IEnumerable<Brand>> GetAllAsync();
+        Task<IEnumerable<BrandViewModel>> GetAllAsync();
 
-        Task CreateAsync(string name);
+        Task CreateAsync(BrandViewModel model);
 
         Task DeleteAsync(Guid id);
     }

@@ -6,9 +6,9 @@ namespace PadelStrore.Services.Core.Contracts
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<Category>> GetAllAsync();
+        Task<IEnumerable<CategoryViewModel>> GetAllAsync();
 
-        Task CreateAsync(string name);
+        Task CreateAsync(CategoryViewModel model);
 
         Task DeleteAsync(Guid id);
     }

@@ -13,5 +13,7 @@ namespace PadelStore.ViewModels.Admin
         [MaxLength(BrandNameMaxLength)]
         [MinLength(BrandNameMinLength)]
         public string Brand { get; set; } = null!;
+
+        
     }
 }

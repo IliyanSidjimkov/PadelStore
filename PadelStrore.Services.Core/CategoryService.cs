@@ -15,19 +15,25 @@ namespace PadelStrore.Services.Core
         {
             this.context = context;
         }
-        public async Task<IEnumerable<Category>> GetAllAsync()
+        public async Task<IEnumerable<CategoryViewModel>> GetAllAsync()
         {
-            return await context.Categories.ToListAsync();
+            return await context.Categories
+                 .Select(c => new CategoryViewModel
+                 {
+                     Id = c.Id,
+                     CategoryName = c.CategoryName
+                 })
+                 .ToListAsync();
         }
 
-        public async Task CreateAsync(string name)
+        public async Task CreateAsync(CategoryViewModel model)
         {
-            var category = new Category
+            var brand = new Category
             {
-                CategoryName = name
+                CategoryName = model.CategoryName
             };
 
-            await context.Categories.AddAsync(category);
+            await context.Categories.AddAsync(brand);
             await context.SaveChangesAsync();
         }
 

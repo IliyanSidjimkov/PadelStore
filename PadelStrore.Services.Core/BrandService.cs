@@ -15,16 +15,22 @@ namespace PadelStrore.Services.Core
         {
             this.context = context;
         }
-        public async Task<IEnumerable<Brand>> GetAllAsync()
+        public async Task<IEnumerable<BrandViewModel>> GetAllAsync()
         {
-            return await context.Brands.ToListAsync();
+            return await context.Brands
+                .Select(b => new BrandViewModel
+                {
+                    Id = b.Id,
+                    Brand = b.BrandName
+                })
+                .ToListAsync();
         }
 
-        public async Task CreateAsync(string name)
+        public async Task CreateAsync(BrandViewModel model)
         {
             var brand = new Brand
             {
-                BrandName = name
+                BrandName = model.Brand
             };
 
             await context.Brands.AddAsync(brand);

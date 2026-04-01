@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PadelStore.ViewModels.Admin;
-using PadelStrore.Services.Core;
 using PadelStrore.Services.Core.Contracts;
 
 namespace PadelStore.Areas.Admin.Controllers
@@ -21,12 +20,15 @@ namespace PadelStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string name)
+        public async Task<IActionResult> Create(BrandViewModel model)
         {
-            if (!string.IsNullOrWhiteSpace(name))
+            if (!ModelState.IsValid)
             {
-                await brandService.CreateAsync(name);
+                var brands = await brandService.GetAllAsync();
+                return View("Index", brands);
             }
+
+            await brandService.CreateAsync(model);
 
             return RedirectToAction(nameof(Index));
         }

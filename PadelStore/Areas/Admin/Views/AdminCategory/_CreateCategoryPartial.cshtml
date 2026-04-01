@@ -1,0 +1,16 @@
+﻿@using PadelStore.ViewModels.Admin
+@model CategoryViewModel
+
+<form asp-action="Create" method="post" class="mb-3">
+
+    <div class="input-group">
+
+        <input asp-for="CategoryName" class="form-control" placeholder="New brand..." />
+
+        <button type="submit" class="btn btn-success">Add</button>
+
+    </div>
+
+    <span asp-validation-for="CategoryName" class="text-danger"></span>
+
+</form>

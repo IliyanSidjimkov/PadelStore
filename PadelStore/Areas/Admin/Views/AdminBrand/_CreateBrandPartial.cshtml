@@ -1,0 +1,16 @@
+﻿@using PadelStore.ViewModels.Admin
+@model BrandViewModel
+
+<form asp-action="Create" method="post" class="mb-3">
+
+    <div class="input-group">
+
+        <input asp-for="Brand" class="form-control" placeholder="New brand..." />
+
+        <button type="submit" class="btn btn-success">Add</button>
+
+    </div>
+
+    <span asp-validation-for="Brand" class="text-danger"></span>
+
+</form>

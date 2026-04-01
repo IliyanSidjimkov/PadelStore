@@ -20,13 +20,15 @@ namespace PadelStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string name)
+        public async Task<IActionResult> Create(CategoryViewModel model)
         {
-            if (!string.IsNullOrWhiteSpace(name))
+            if (!ModelState.IsValid)
             {
-                await categoryService.CreateAsync(name);
+                var categories = await categoryService.GetAllAsync();
+                return View("Index", categories);
             }
 
+            await categoryService.CreateAsync(model);
             return RedirectToAction(nameof(Index));
         }
 
