@@ -1,0 +1,47 @@
+﻿@using PadelStore.ViewModels
+@model OrderDetailsViewModel
+
+<h2 class="mb-4">Order #@Model.Id</h2>
+
+<div class="mb-3">
+    <strong>Date:</strong> @Model.CreatedOn.ToString("dd MMM yyyy") <br />
+    <strong>Status:</strong>
+    <span class="badge bg-info">@Model.Status</span>
+</div>
+
+<table class="table table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th></th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (OrderItemViewModel item in Model.Items)
+        {
+            <tr>
+                <td>
+                    <img src="@item.ImageUrl" width="70" class="rounded" />
+                </td>
+
+                <td>@item.ProductName</td>
+
+                <td>@item.Price.ToString("C")</td>
+
+                <td>@item.Quantity</td>
+
+                <td>
+                    @((item.Price * item.Quantity).ToString("C"))
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4 class="text-end mt-3">
+    Total: <span class="text-success">@Model.TotalPrice.ToString("C")</span>
+</h4>

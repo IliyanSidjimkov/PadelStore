@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PadelStore.Data;
 using PadelStore.Data.Models;
 using PadelStore.Data.Models.Enums;
+using PadelStore.ViewModels;
 using PadelStore.ViewModels.Admin;
 using PadelStrore.Services.Core.Contracts;
 
@@ -94,6 +95,30 @@ namespace PadelStrore.Services.Core
            Status = o.Status.ToString()
        })
        .ToListAsync();
+        }
+
+        public async Task<OrderDetailsViewModel?> GetDetailsAsync(Guid orderId)
+        {
+            OrderDetailsViewModel? order = await context.Orders
+        .Where(o => o.Id == orderId)
+        .Select(o => new OrderDetailsViewModel
+        {
+            Id = o.Id,
+            CreatedOn = o.OrderDate,
+            TotalPrice = o.TotalPrice,
+            Status = o.Status.ToString(),
+
+            Items = o.Items.Select(i => new OrderItemViewModel
+            {
+                ProductName = i.Product.ProductName,
+                ImageUrl = i.Product.ImageUrl,
+                Quantity = i.Quantity,
+                Price = i.Price
+            })
+        })
+        .FirstOrDefaultAsync();
+
+            return order;
         }
     }
 

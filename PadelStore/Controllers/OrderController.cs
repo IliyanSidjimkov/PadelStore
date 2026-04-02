@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PadelStore.Data.Models;
+using PadelStore.ViewModels;
 using PadelStore.ViewModels.Admin;
 using PadelStrore.Services.Core.Contracts;
 
@@ -45,6 +46,19 @@ namespace PadelStore.Controllers
             IEnumerable<OrderViewModel> orders = await orderService.GetByUserIdAsync(userId);
 
             return View(orders);
+        }
+    
+
+    public async Task<IActionResult> Details(Guid id)
+        {
+            OrderDetailsViewModel? order = await orderService.GetDetailsAsync(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
         }
     }
 }
