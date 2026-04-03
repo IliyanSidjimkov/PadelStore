@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PadelStore.ViewModels;
 using PadelStore.ViewModels.Admin;
 using PadelStrore.Services.Core;
 using PadelStrore.Services.Core.Contracts;
@@ -15,10 +16,13 @@ namespace PadelStore.Areas.Admin.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            IEnumerable<ProductAllViewModel> products = await productService.GetAllAsync();
-            return View(products);
+            int pageSize = 12;
+
+            PageViewModel model = await productService.GetPagedAsync(page, pageSize);
+
+            return View(model);
         }
         [HttpGet]
         public async Task<IActionResult> Create()

@@ -26,3 +26,20 @@ body {
     overflow-y: auto; 
     padding-right: 5px; 
 }
+
+.product-card {
+    font-size: 14px;
+}
+
+.product-card h5 {
+        font-size: 16px;
+        margin-bottom: 5px;
+}
+
+.product-card p {
+        margin-bottom: 8px;
+}
+.product-img {
+    height: 180px;       
+    object-fit: cover;   
+}

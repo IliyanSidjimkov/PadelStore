@@ -1,34 +1,75 @@
-﻿
-@using PadelStore.ViewModels.Admin
-@model IEnumerable<ProductAllViewModel>
+﻿@using PadelStore.ViewModels
+@model PageViewModel
 
-<h2 class="mb-4">Products 🛍️</h2>
+<div class="d-flex flex-column min-vh-100">
 
-<div class="row">
+   
+    <div class="container flex-grow-1">
 
-    @foreach (var p in Model)
-    {
-        <div class="col-md-3 mb-4">
-            <div class="card h-100 shadow-sm">
+        <div class="row">
 
-                <img src="@p.ImageUrl" class="card-img-top" style="height:200px; object-fit:cover;" />
+            @foreach (var product in Model.Products)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
 
-                <div class="card-body text-center">
-                    <h5>@p.ProductName</h5>
-                    <p class="text-muted">@p.CategoryName</p>
+                    <div class="card h-100 shadow-sm product-card">
 
-                    <h6>@p.ProductPrice.ToString("C")</h6>
+                        <img src="@product.ImageUrl" class="card-img-top product-img" />
 
-                    <a asp-action="Details" asp-route-id="@p.Id"
-                           class="btn btn-outline-dark w-100 mt-2">
-                        View Details
-                        <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-warning btn-sm">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger btn-sm">Delete</a>
-                    </a>
+                        <div class="card-body p-2">
+
+                            <h6>@product.ProductName</h6>
+
+                            <p class="fw-bold">@product.ProductPrice.ToString("C")</p>
+
+                            <div class="d-flex flex-column gap-2">
+                            <a asp-controller="AdminProduct"
+                                   asp-action="Details"
+                                   asp-route-id="@product.Id"
+                                   class="btn btn-sm btn-primary w-100">
+                                Details
+                            </a>
+                            <a asp-controller="AdminProduct"
+                                   asp-action="Edit"
+                                   asp-route-id="@product.Id"
+                                   class="btn btn-sm btn-primary w-100">
+                                Edit
+                            </a>
+                            <a asp-controller="AdminProduct"
+                                   asp-action="Delete"
+                                   asp-route-id="@product.Id"
+                                   class="btn btn-sm btn-primary w-100">
+                                Delete
+                            </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
-
-            </div>
+            }
         </div>
-    }
 
+    </div>
+    <div class="pb-4">
+        <nav>
+            <ul class="pagination justify-content-center">
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+
+                        <a class="page-link"
+                               asp-action="Index"
+                               asp-route-page="@i">
+                            @i
+                        </a>
+
+                    </li>
+                }
+
+            </ul>
+        </nav>
+    </div>
 </div>

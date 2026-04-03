@@ -1,31 +1,61 @@
-﻿@using PadelStore.ViewModels.Admin
-@model IEnumerable<ProductAllViewModel>
+﻿@using PadelStore.ViewModels
+@model PageViewModel
 
-<h2 class="mb-4">Products 🛍️</h2>
+<div class="d-flex flex-column min-vh-100">
+
+   
+    <div class="container flex-grow-1">
 
 <div class="row">
 
-    @foreach (var p in Model)
+    @foreach (var product in Model.Products)
     {
-        <div class="col-md-3 mb-4">
-            <div class="card h-100 shadow-sm">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
 
-                <img src="@p.ImageUrl" class="card-img-top" style="height:200px; object-fit:cover;" />
+            <div class="card h-100 shadow-sm product-card">
 
-                <div class="card-body text-center">
-                    <h5>@p.ProductName</h5>
-                    <p class="text-muted">@p.CategoryName</p>
+                <img src="@product.ImageUrl" class="card-img-top product-img" />
 
-                    <h6>@p.ProductPrice.ToString("C")</h6>
+                <div class="card-body p-2">
 
-                    <a asp-action="Details" asp-route-id="@p.Id"
-                           class="btn btn-outline-dark w-100 mt-2">
-                        View Details
+                    <h6>@product.ProductName</h6>
+
+                    <p class="fw-bold">@product.ProductPrice.ToString("C")</p>
+
+                    <a asp-controller="Product"
+                           asp-action="Details"
+                           asp-route-id="@product.Id"
+                           class="btn btn-sm btn-primary w-100">
+                        Details
                     </a>
+
                 </div>
 
             </div>
+
         </div>
     }
+        </div>
 
+</div>
+    <div class="pb-4">
+<nav>
+    <ul class="pagination justify-content-center">
+
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+
+                <a class="page-link"
+                       asp-action="Index"
+                       asp-route-page="@i">
+                    @i
+                </a>
+
+            </li>
+        }
+
+    </ul>
+</nav>
+    </div>
 </div>

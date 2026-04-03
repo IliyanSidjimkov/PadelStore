@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using PadelStore.ViewModels;
 using PadelStore.ViewModels.Admin;
 
 
@@ -21,5 +22,7 @@ namespace PadelStrore.Services.Core.Contracts
         Task UpdateAsync(ProductEditViewModel model);
 
         Task DeleteAsync(Guid id);
+
+        Task<PageViewModel> GetPagedAsync(int page, int pageSize);
     }
 }

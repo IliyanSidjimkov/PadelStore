@@ -125,6 +125,31 @@ namespace PadelStrore.Services.Core
         .FirstOrDefaultAsync();
         }
 
+        public async Task<PageViewModel> GetPagedAsync(int page, int pageSize)
+        {
+            int totalProducts = await context.Products.CountAsync();
+
+            List<ProductAllViewModel> products = await context.Products
+                .OrderBy(p => p.ProductName)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(p => new ProductAllViewModel
+                {
+                    Id = p.Id,
+                    ProductName = p.ProductName,
+                    ProductPrice = p.Price,
+                    ImageUrl = p.ImageUrl
+                })
+                .ToListAsync();
+
+            return new PageViewModel
+            {
+                Products = products,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(totalProducts / (double)pageSize)
+            };
+        }
+
         public async Task UpdateAsync(ProductEditViewModel model)
         {
             Product? product = await context.Products.FindAsync(model.Id);
