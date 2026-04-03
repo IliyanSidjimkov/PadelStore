@@ -28,6 +28,8 @@
 
         <h4 class="mt-4">Reviews</h4>
 
+        <div class="reviews-container">
+
         @foreach (ReviewViewModel review in Model.Reviews)
         {
             <div class="border p-2 mb-2 rounded">
@@ -50,7 +52,10 @@
                 }
 
             </div>
+
+        
         }
+    </div>
 
         <h4 class="mt-3">@Model.Price.ToString("C")</h4>
         @if (User.Identity != null && User.Identity.IsAuthenticated)

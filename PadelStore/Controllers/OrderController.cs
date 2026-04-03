@@ -31,7 +31,7 @@ namespace PadelStore.Controllers
 
             await orderService.CreateOrderAsync(userId);
 
-            return RedirectToAction("Index", "Product");
+            return View();
         }
 
         public async Task<IActionResult> MyOrders()

@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.reviews-container {
+    max-height: 300px; 
+    overflow-y: auto; 
+    padding-right: 5px; 
+}
