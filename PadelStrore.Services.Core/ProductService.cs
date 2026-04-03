@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PadelStore.Data;
 using PadelStore.Data.Models;
+using PadelStore.ViewModels;
 using PadelStore.ViewModels.Admin;
 using PadelStrore.Services.Core.Contracts;
 
@@ -111,7 +112,15 @@ namespace PadelStrore.Services.Core
             Price = p.Price,
             ImageUrl = p.ImageUrl,
             CategoryName = p.Category.CategoryName,
-            BrandName = p.Brand.BrandName
+            BrandName = p.Brand.BrandName,
+            Reviews = p.Reviews.Select(r => new ReviewViewModel
+            {
+                Id = r.Id,
+                Comment = r.Comment,
+                Rating = r.Rating,
+                UserEmail = r.User.Email!,
+                UserId = r.UserId
+            })
         })
         .FirstOrDefaultAsync();
         }

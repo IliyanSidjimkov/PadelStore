@@ -1,0 +1,33 @@
+﻿@using PadelStore.ViewModels
+@model IEnumerable<ReviewViewModel>
+
+<h2>All Reviews</h2>
+
+@foreach (var review in Model)
+{
+    <div class="border p-3 mb-3 rounded">
+
+        <a asp-controller="AdminProduct"
+               asp-action="Details"
+               asp-route-id="@review.ProductId"
+               class="text-decoration-none">
+
+            <h5 class="text-primary">
+                Product: @review.ProductName
+            </h5>
+
+        </a>
+
+        <strong>@review.UserEmail</strong>
+        <span class="text-warning">(@review.Rating ⭐)</span>
+
+        <p>@review.Comment</p>
+
+        <a asp-action="Delete"
+           asp-route-id="@review.Id"
+           class="btn btn-danger btn-sm">
+            Delete
+        </a>
+
+    </div>
+}

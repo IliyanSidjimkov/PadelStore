@@ -14,5 +14,8 @@ namespace PadelStore.ViewModels.Admin
 
         public string CategoryName { get; set; } = null!;
         public string BrandName { get; set; } = null!;
+
+        public IEnumerable<ReviewViewModel> Reviews { get; set; }
+    = new List<ReviewViewModel>();
     }
 }

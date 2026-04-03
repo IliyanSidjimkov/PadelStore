@@ -37,6 +37,7 @@ namespace PadelStore
             builder.Services.AddScoped<IBrandService, BrandService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IReviewService, ReviewService>();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();

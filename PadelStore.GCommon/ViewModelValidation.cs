@@ -28,6 +28,11 @@ namespace PadelStore.GCommon
             public const int BrandNameMaxLength = 50;
 
         }
+        public static class Review
+        {
+            public const int ReviewCommentMinLenght = 5;
+            public const int ReviewCommentMaxLenght = 500;
+        }
 
     }
 }
