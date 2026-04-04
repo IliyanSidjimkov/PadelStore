@@ -1,57 +1,102 @@
 ﻿@using PadelStore.ViewModels
-@model PageViewModel
+@model ProductQueryViewModel
+
+<form method="get" class="mb-4">
+
+    <div class="row">
+
+        <!-- SEARCH -->
+        <div class="col-md-4">
+            <input asp-for="SearchTerm"
+                   class="form-control"
+                   placeholder="Search products..." />
+        </div>
+
+        <!-- CATEGORY -->
+        <div class="col-md-3">
+            <select asp-for="CategoryId"
+                    asp-items="Model.Categories"
+                    class="form-select">
+                <option value="">All Categories</option>
+            </select>
+        </div>
+
+        <!-- BRAND -->
+        <div class="col-md-3">
+            <select asp-for="BrandId"
+                    asp-items="Model.Brands"
+                    class="form-select">
+                <option value="">All Brands</option>
+            </select>
+        </div>
+
+        <!-- BUTTON -->
+        <div class="col-md-1">
+            <button class="btn btn-primary w-100">
+                🔍
+            </button>
+        </div>
+
+        <!-- RESET -->
+        <div class="col-md-1">
+            <a asp-action="Index" class="btn btn-secondary w-100">
+                Reset
+            </a>
+        </div>
+
+    </div>
+
+</form>
+
 
 <div class="d-flex flex-column min-vh-100">
 
-   
     <div class="container flex-grow-1">
 
         <div class="row">
 
-            @foreach (var product in Model.Products)
+            @if (!Model.Products.Any())
             {
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="text-center mt-5">
+                    <h4>No products found 😢</h4>
+                </div>
+            }
+            else
+            {
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
 
-                    <div class="card h-100 shadow-sm product-card">
+                        <div class="card h-100 shadow-sm product-card">
 
-                        <img src="@product.ImageUrl" class="card-img-top product-img" />
+                            <img src="@product.ImageUrl" class="card-img-top product-img" />
 
-                        <div class="card-body p-2">
+                            <div class="card-body p-2">
 
-                            <h6>@product.ProductName</h6>
+                                <h6>@product.ProductName</h6>
 
-                            <p class="fw-bold">@product.ProductPrice.ToString("C")</p>
+                                <p class="fw-bold">@product.ProductPrice.ToString("C")</p>
 
-                            <div class="d-flex flex-column gap-2">
-                            <a asp-controller="AdminProduct"
-                                   asp-action="Details"
-                                   asp-route-id="@product.Id"
-                                   class="btn btn-sm btn-primary w-100">
-                                Details
-                            </a>
-                            <a asp-controller="AdminProduct"
-                                   asp-action="Edit"
-                                   asp-route-id="@product.Id"
-                                   class="btn btn-sm btn-primary w-100">
-                                Edit
-                            </a>
-                            <a asp-controller="AdminProduct"
-                                   asp-action="Delete"
-                                   asp-route-id="@product.Id"
-                                   class="btn btn-sm btn-primary w-100">
-                                Delete
-                            </a>
+                                <a asp-controller="Product"
+                                       asp-action="Details"
+                                       asp-route-id="@product.Id"
+                                       class="btn btn-sm btn-primary w-100">
+                                    Details
+                                </a>
+
                             </div>
 
                         </div>
 
                     </div>
-
-                </div>
+                }
             }
+
         </div>
 
     </div>
+
+    <!-- PAGINATION -->
     <div class="pb-4">
         <nav>
             <ul class="pagination justify-content-center">
@@ -62,7 +107,10 @@
 
                         <a class="page-link"
                                asp-action="Index"
-                               asp-route-page="@i">
+                               asp-route-CurrentPage="@i"
+                               asp-route-SearchTerm="@Model.SearchTerm"
+                               asp-route-CategoryId="@Model.CategoryId"
+                               asp-route-BrandId="@Model.BrandId">
                             @i
                         </a>
 
@@ -72,4 +120,5 @@
             </ul>
         </nav>
     </div>
+
 </div>

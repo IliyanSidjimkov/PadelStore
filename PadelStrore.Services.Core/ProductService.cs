@@ -125,6 +125,48 @@ namespace PadelStrore.Services.Core
         .FirstOrDefaultAsync();
         }
 
+        public async Task<ProductQueryViewModel> GetFilteredAsync(ProductQueryViewModel model, int pageSize)
+        {
+            IQueryable<Product> query = context.Products.AsQueryable();
+
+            
+            if (!string.IsNullOrWhiteSpace(model.SearchTerm))
+            {
+                query = query.Where(p => p.ProductName.Contains(model.SearchTerm));
+            }
+
+            
+            if (model.CategoryId.HasValue)
+            {
+                query = query.Where(p => p.CategoryId == model.CategoryId);
+            }
+
+            
+            if (model.BrandId.HasValue)
+            {
+                query = query.Where(p => p.BrandId == model.BrandId);
+            }
+
+            int totalProducts = await query.CountAsync();
+
+            List<ProductAllViewModel> products = await query
+                .Skip((model.CurrentPage - 1) * pageSize)
+                .Take(pageSize)
+                .Select(p => new ProductAllViewModel
+                {
+                    Id = p.Id,
+                    ProductName = p.ProductName,
+                    ProductPrice = p.Price,
+                    ImageUrl = p.ImageUrl
+                })
+                .ToListAsync();
+
+            model.Products = products;
+            model.TotalPages = (int)Math.Ceiling(totalProducts / (double)pageSize);
+
+            return model;
+        }
+
         public async Task<PageViewModel> GetPagedAsync(int page, int pageSize)
         {
             int totalProducts = await context.Products.CountAsync();

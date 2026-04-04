@@ -24,5 +24,7 @@ namespace PadelStrore.Services.Core.Contracts
         Task DeleteAsync(Guid id);
 
         Task<PageViewModel> GetPagedAsync(int page, int pageSize);
+
+        Task<ProductQueryViewModel> GetFilteredAsync(ProductQueryViewModel model, int pageSize);
     }
 }

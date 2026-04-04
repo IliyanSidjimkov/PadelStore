@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PadelStore.Data;
 using PadelStore.Data.Models;
 using PadelStore.ViewModels.Admin;
@@ -46,6 +47,17 @@ namespace PadelStrore.Services.Core
                 context.Brands.Remove(brand);
                 await context.SaveChangesAsync();
             }
+        }
+
+        public async Task<IEnumerable<SelectListItem>> GetBrandsAsync()
+        {
+            return await context.Brands
+         .Select(c => new SelectListItem
+         {
+             Value = c.Id.ToString(),
+             Text = c.BrandName
+         })
+         .ToListAsync();
         }
     }
 }
