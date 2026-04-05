@@ -18,11 +18,7 @@ namespace PadelStore.Controllers
         {
             return View();
         }
-        [AllowAnonymous]
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        
 
         [AllowAnonymous]
         [Route("Home/Error")]
