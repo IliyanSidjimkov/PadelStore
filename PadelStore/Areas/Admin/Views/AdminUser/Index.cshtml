@@ -1,0 +1,65 @@
+﻿@using PadelStore.ViewModels.Admin
+@using System.Security.Claims
+@model IEnumerable<AdminManageUserViewModel>
+@{
+    string? currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+
+
+<h2>User Management</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+
+                <td>
+                    @foreach (var role in user.Roles)
+                    {
+                        <span class="badge bg-primary">@role</span>
+                    }
+                </td>
+
+                <td>
+                    @if (currentUserId == user.Id.ToString())
+                    {
+                        <span class="text-muted fw-bold">👑 This is you</span>
+                    }
+                    else
+                    {
+
+                        <form method="post" asp-action="AssignRole" class="d-inline">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <input type="hidden" name="role" value="Admin" />
+                            <button class="btn btn-success btn-sm">Make Admin</button>
+                        </form>
+
+
+                        <form method="post" asp-action="RemoveRole" class="d-inline">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <input type="hidden" name="role" value="Admin" />
+                            <button class="btn btn-warning btn-sm">Remove Admin</button>
+                        </form>
+
+
+                        <form method="post" asp-action="Delete" class="d-inline">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
