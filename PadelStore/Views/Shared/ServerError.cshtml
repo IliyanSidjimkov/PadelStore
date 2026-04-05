@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Server Error";
+}
+
+<div class="d-flex flex-column justify-content-center align-items-center text-center" style="min-height: 70vh;">
+
+    <h1 class="display-1 text-danger fw-bold">500</h1>
+
+    <h3 class="mb-3">Something went wrong 💥</h3>
+
+    <p class="text-muted mb-4">
+        An unexpected error occurred on the server. Please try again later.
+    </p>
+
+    <div class="d-flex gap-3">
+
+        <a asp-controller="Home"
+               asp-action="Index"
+               class="btn btn-primary">
+            🏠 Back to Home
+        </a>
+
+        <a asp-controller="Product"
+               asp-action="Index"
+               class="btn btn-outline-dark">
+            🛍 Browse Products
+        </a>
+
+    </div>
+
+</div>
