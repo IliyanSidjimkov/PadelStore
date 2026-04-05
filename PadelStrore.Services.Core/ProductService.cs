@@ -40,7 +40,7 @@ namespace PadelStrore.Services.Core
 
             if (product != null)
             {
-                context.Products.Remove(product);
+                product.IsDeleted = true;
                 await context.SaveChangesAsync();
             }
         }
@@ -128,8 +128,9 @@ namespace PadelStrore.Services.Core
         public async Task<ProductQueryViewModel> GetFilteredAsync(ProductQueryViewModel model, int pageSize)
         {
             IQueryable<Product> query = context.Products.AsQueryable();
+            query = query.Where(p => !p.IsDeleted);
 
-            
+
             if (!string.IsNullOrWhiteSpace(model.SearchTerm))
             {
                 query = query.Where(p => p.ProductName.Contains(model.SearchTerm));

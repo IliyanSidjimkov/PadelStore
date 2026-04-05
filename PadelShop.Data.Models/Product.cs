@@ -33,6 +33,8 @@ namespace PadelStore.Data.Models
         public Guid BrandId { get; set; }
         public Brand Brand { get; set; } = null!;
 
+        public bool IsDeleted { get; set; } = false;
+
         public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }
