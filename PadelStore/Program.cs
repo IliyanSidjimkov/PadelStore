@@ -65,7 +65,9 @@ namespace PadelStore
             app.UseRolesSeeder();
             app.UseAdminUserSeeder();
 
-           app.MapControllerRoute(
+            app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
+
+            app.MapControllerRoute(
            name: "areas",
            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
          );

@@ -23,10 +23,21 @@ namespace PadelStore.Controllers
         {
             return View();
         }
+
         [AllowAnonymous]
+        [Route("Home/Error")]
+        [Route("Home/Error/{statusCode}")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int statusCode = 0)
         {
+            
+
+            if (statusCode == StatusCodes.Status404NotFound)
+            {
+                return View("NotFound");
+            }
+
+            
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
