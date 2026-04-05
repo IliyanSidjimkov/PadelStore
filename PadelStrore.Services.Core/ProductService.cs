@@ -6,6 +6,7 @@ using PadelStore.Data.Models;
 using PadelStore.ViewModels;
 using PadelStore.ViewModels.Admin;
 using PadelStrore.Services.Core.Contracts;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace PadelStrore.Services.Core
 {
@@ -103,7 +104,7 @@ namespace PadelStrore.Services.Core
         public async Task<ProductDetailsViewModel?> GetDetailsAsync(Guid id)
         {
             return await context.Products
-        .Where(p => p.Id == id)
+        .Where(p => p.Id == id && !p.IsDeleted)
         .Select(p => new ProductDetailsViewModel
         {
             Id = p.Id,

@@ -118,7 +118,14 @@ namespace PadelStore.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(Guid id)
         {
-            await productService.DeleteAsync(id);
+            ProductEditViewModel? model = await productService.GetByIdAsync(id);
+              if (model == null)
+            {  
+                
+                return NotFound(); 
+            
+            }
+                await productService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
