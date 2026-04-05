@@ -5,14 +5,13 @@
 
     <div class="row">
 
-        <!-- SEARCH -->
+
         <div class="col-md-4">
             <input asp-for="SearchTerm"
                    class="form-control"
                    placeholder="Search products..." />
         </div>
 
-        <!-- CATEGORY -->
         <div class="col-md-3">
             <select asp-for="CategoryId"
                     asp-items="Model.Categories"
@@ -21,7 +20,6 @@
             </select>
         </div>
 
-        <!-- BRAND -->
         <div class="col-md-3">
             <select asp-for="BrandId"
                     asp-items="Model.Brands"
@@ -30,14 +28,14 @@
             </select>
         </div>
 
-        <!-- BUTTON -->
+  
         <div class="col-md-1">
             <button class="btn btn-primary w-100">
                 🔍
             </button>
         </div>
 
-        <!-- RESET -->
+
         <div class="col-md-1">
             <a asp-action="Index" class="btn btn-secondary w-100">
                 Reset
@@ -96,7 +94,7 @@
 
     </div>
 
-    <!-- PAGINATION -->
+ 
     <div class="pb-4">
         <nav>
             <ul class="pagination justify-content-center">

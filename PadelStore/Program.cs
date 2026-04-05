@@ -32,12 +32,9 @@ namespace PadelStore
                 .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ShopDbContext>();
 
-            builder.Services.AddScoped<IProductService, ProductService>();
-            builder.Services.AddScoped<ICategoryService, CategoryService>();
-            builder.Services.AddScoped<IBrandService, BrandService>();
-            builder.Services.AddScoped<ICartService, CartService>();
-            builder.Services.AddScoped<IOrderService, OrderService>();
-            builder.Services.AddScoped<IReviewService, ReviewService>();
+            
+            builder.Services.RegisterServices(typeof(ProductService));
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
