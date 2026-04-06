@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PadelStore.Data;
 
@@ -11,9 +12,11 @@ using PadelStore.Data;
 namespace PadelStore.Data.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260406135937_DataBaseSeed")]
+    partial class DataBaseSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -561,17 +564,6 @@ namespace PadelStore.Data.Migrations
                             Price = 70m,
                             ProductDescription = "Раница Academy Team 22 L има едно основно отделение с двупосочен цип. Голям външен джоб с цип, който може да побере топка. Вътрешен джоб, който може да побере лаптоп с размер на екрана до 15 инча.",
                             ProductName = "Nike Backpack"
-                        },
-                        new
-                        {
-                            Id = new Guid("481d1039-e133-4c2f-9c65-832ffff1866a"),
-                            BrandId = new Guid("eb8608d9-3afc-4de5-b335-2635a1d3d584"),
-                            CategoryId = new Guid("c18232f3-981a-4f77-a51e-62d755dcdfb4"),
-                            ImageUrl = "https://cdn.sportdepot.bg/files/catalog/detail/IC3568_01.jpg",
-                            IsDeleted = false,
-                            Price = 10m,
-                            ProductDescription = "Бъдете фокусирани върху играта си, точка след точка. Тези големи тенис накитници от adidas ви помагат да отвеждате влагата и да поддържате концентрацията си. Меки, еластични и абсорбиращи, те ще гарантират, че ще държите окото си върху топката до гейма, сета и мача.",
-                            ProductName = "Adidas Wristband"
                         });
                 });
 
