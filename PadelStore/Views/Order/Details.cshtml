@@ -30,12 +30,12 @@
 
                 <td>@item.ProductName</td>
 
-                <td>@item.Price.ToString("C")</td>
+                <td>@item.Price €</td>
 
                 <td>@item.Quantity</td>
 
                 <td>
-                    @((item.Price * item.Quantity).ToString("C"))
+                    @(item.Price * item.Quantity) €
                 </td>
             </tr>
         }
@@ -43,5 +43,5 @@
 </table>
 
 <h4 class="text-end mt-3">
-    Total: <span class="text-success">@Model.TotalPrice.ToString("C")</span>
+    Total: <span class="text-success">@Model.TotalPrice €</span>
 </h4>

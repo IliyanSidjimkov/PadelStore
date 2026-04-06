@@ -43,3 +43,10 @@ body {
     height: 180px;       
     object-fit: cover;   
 }
+.btn {
+    transition: all 0.2s ease-in-out;
+}
+
+    .btn:hover {
+        transform: scale(1.05);
+    }

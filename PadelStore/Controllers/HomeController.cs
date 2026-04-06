@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PadelStore.Data.Models;
 using PadelStore.Models;
 using System.Diagnostics;
 
@@ -7,15 +9,25 @@ namespace PadelStore.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public HomeController(ILogger<HomeController> logger,UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
+            this.userManager = userManager;
         }
         [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            if (User.Identity!.IsAuthenticated)
+            {
+                ApplicationUser? user = await userManager.GetUserAsync(User);
+
+                ViewBag.FullName = $"{user?.FirstName} {user?.LastName}";
+            }
+
             return View();
         }
         
