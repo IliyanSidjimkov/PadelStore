@@ -70,6 +70,7 @@ namespace PadelStore.Data.Seeding
                     .CreateAsync(adminUser, adminPassword);
                 if (!result.Succeeded)
                 {
+
                     throw new InvalidOperationException(AdminUserSeedingExceptionMessage);
                 }
             }

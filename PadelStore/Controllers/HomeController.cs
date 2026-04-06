@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace PadelStore.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : BaseController
     {
 
@@ -18,7 +19,7 @@ namespace PadelStore.Controllers
             _logger = logger;
             this.userManager = userManager;
         }
-        [AllowAnonymous]
+       
         public async Task<IActionResult> Index()
         {
             if (User.Identity!.IsAuthenticated)
@@ -32,7 +33,7 @@ namespace PadelStore.Controllers
         }
         
 
-        [AllowAnonymous]
+        
         [Route("Home/Error")]
         [Route("Home/Error/{statusCode}")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
