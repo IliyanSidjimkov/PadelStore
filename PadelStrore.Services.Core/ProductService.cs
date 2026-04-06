@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PadelStore.Data;
@@ -6,7 +6,7 @@ using PadelStore.Data.Models;
 using PadelStore.ViewModels;
 using PadelStore.ViewModels.Admin;
 using PadelStrore.Services.Core.Contracts;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
 
 namespace PadelStrore.Services.Core
 {
