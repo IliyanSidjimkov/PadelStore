@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PadelStore.Data;
 using PadelStore.Data.Models;
 using PadelStore.ViewModels;
 using PadelStrore.Services.Core.Contracts;
@@ -10,12 +11,14 @@ namespace PadelStore.Controllers
     {
         private readonly ICartService cartService;
         private readonly UserManager<ApplicationUser> userManager;
+       
 
         public CartController(ICartService cartService,
                               UserManager<ApplicationUser> userManager)
         {
             this.cartService = cartService;
             this.userManager = userManager;
+            
         }
         public async Task<IActionResult> Index()
         {
@@ -38,6 +41,16 @@ namespace PadelStore.Controllers
 
         public async Task<IActionResult> Remove(Guid id)
         {
+
+            Guid userId = Guid.Parse(userManager.GetUserId(User)!);
+
+            bool isOwner = await cartService.IsOwnerAsync(id, userId);
+
+            if (!isOwner)
+            {
+                return NotFound(); 
+            }
+
             await cartService.RemoveAsync(id);
 
             return RedirectToAction(nameof(Index));
@@ -45,12 +58,29 @@ namespace PadelStore.Controllers
 
         public async Task<IActionResult> Increase(Guid id)
         {
+            Guid userId = Guid.Parse(userManager.GetUserId(User)!);
+
+            
+
+            if (!await cartService.IsOwnerAsync(id, userId))
+            {
+                return NotFound();
+            }
+
             await cartService.IncreaseQuantityAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Decrease(Guid id)
         {
+            Guid userId = Guid.Parse(userManager.GetUserId(User)!);
+
+            
+
+            if (!await cartService.IsOwnerAsync(id, userId))
+            {
+                return NotFound();
+            }
             await cartService.DecreaseQuantityAsync(id);
             return RedirectToAction(nameof(Index));
         }

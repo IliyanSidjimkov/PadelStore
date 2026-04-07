@@ -5,7 +5,7 @@
 
 <div class="container text-center" style="margin-top:100px;">
 
-    <!-- TITLE -->
+
     <h1 class="display-4 fw-bold text-primary mb-3">
         🎾 PadelStore
     </h1>
@@ -14,7 +14,7 @@
         Your one-stop shop for everything padel
     </p>
 
-    <!-- USER -->
+ 
     @if (User.Identity!.IsAuthenticated && fullName != null)
     {
         <h5 class="mb-4">
@@ -22,7 +22,6 @@
         </h5>
     }
 
-    <!-- AUTH -->
     <div class="mb-5">
 
         @if (!User.Identity!.IsAuthenticated)
@@ -41,6 +40,7 @@
         {
             <form asp-area="Identity"
                   asp-page="/Account/Logout"
+                  asp-route-returnUrl="@Url.Action("Index", "Home")"
                   method="post"
                   class="d-inline">
 
@@ -52,7 +52,7 @@
 
     </div>
 
-    <!-- MAIN BUTTONS -->
+
     <div class="d-flex justify-content-center gap-3 flex-wrap">
 
        
@@ -89,7 +89,6 @@
 
     </div>
 
-    <!-- FOOTER TEXT -->
     <div class="mt-5 text-muted">
         <p>Discover top-quality padel equipment from the best brands.</p>
         <p>Fast delivery • Secure checkout • Best prices</p>

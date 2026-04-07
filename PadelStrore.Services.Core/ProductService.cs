@@ -39,10 +39,16 @@ namespace PadelStrore.Services.Core
         {
             Product? product = await context.Products.FindAsync(id);
 
+            
+
             if (product != null)
             {
                 product.IsDeleted = true;
                 await context.SaveChangesAsync();
+            }
+            if (product!.Id != id)
+            {
+                return;
             }
         }
 

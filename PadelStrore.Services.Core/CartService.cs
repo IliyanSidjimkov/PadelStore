@@ -41,6 +41,7 @@ namespace PadelStrore.Services.Core
         public async Task DecreaseQuantityAsync(Guid id)
         {
             CartItem? item = await context.CartItems.FindAsync(id);
+            
 
             if (item != null)
             {
@@ -84,6 +85,12 @@ namespace PadelStrore.Services.Core
             }
         }
 
+        public async Task<bool> IsOwnerAsync(Guid cartItemId, Guid userId)
+        {
+            return await context.CartItems
+        .AnyAsync(c => c.Id == cartItemId && c.UserId == userId);
+        }
+
         public async Task RemoveAsync(Guid cartItemId)
         {
             CartItem? item = await context.CartItems.FindAsync(cartItemId);
@@ -92,6 +99,10 @@ namespace PadelStrore.Services.Core
             {
                 context.CartItems.Remove(item);
                 await context.SaveChangesAsync();
+            }
+            if (item!.UserId != cartItemId)
+            {
+                return;
             }
 
         }

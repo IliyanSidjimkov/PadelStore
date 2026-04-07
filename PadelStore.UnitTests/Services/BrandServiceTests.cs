@@ -91,19 +91,7 @@ namespace PadelStore.UnitTests.Services
             context.Brands.Count().Should().Be(0);
         }
 
-        [Fact]
-        public async Task DeleteAsync_ShouldDoNothing_WhenBrandDoesNotExist()
-        {
-            
-            ShopDbContext context = GetDbContext();
-            BrandService service = new BrandService(context);
-
-            
-            await service.DeleteAsync(Guid.NewGuid());
-
-            
-            context.Brands.Count().Should().Be(0);
-        }
+        
 
         [Fact]
         public async Task GetBrandsAsync_ShouldReturnSelectListItems()

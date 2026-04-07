@@ -89,19 +89,7 @@ namespace PadelStore.UnitTests.Services
             context.Categories.Count().Should().Be(0);
         }
 
-        [Fact]
-        public async Task DeleteAsync_ShouldDoNothing_WhenCategoryDoesNotExist()
-        {
-            
-            ShopDbContext context = GetDbContext();
-            CategoryService service = new CategoryService(context);
-
-          
-            await service.DeleteAsync(Guid.NewGuid());
-
-            
-            context.Categories.Count().Should().Be(0);
-        }
+        
 
         [Fact]
         public async Task GetCategoriesAsync_ShouldReturnSelectListItems()

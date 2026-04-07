@@ -41,11 +41,20 @@ namespace PadelStrore.Services.Core
         public async Task DeleteAsync(Guid id)
         {
             Category? category = await context.Categories.FindAsync(id);
+            
 
             if (category != null)
             {
                 context.Categories.Remove(category);
                 await context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException("Category not found");
+            }
+            if (category!.Id != id)
+            {
+                return;
             }
         }
 

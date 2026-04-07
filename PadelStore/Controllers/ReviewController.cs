@@ -22,6 +22,11 @@ namespace PadelStore.Controllers
         {
             string? userIdString = userManager.GetUserId(User);
 
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Details", "Product", new { id = model.ProductId });
+            }
+
             if (!Guid.TryParse(userIdString, out Guid userId))
             {
                 return Unauthorized();
@@ -32,6 +37,7 @@ namespace PadelStore.Controllers
             return RedirectToAction("Details", "Product", new { id = model.ProductId });
         }
 
+       
         public async Task<IActionResult> Delete(Guid id, Guid productId)
         {
             string? userIdString = userManager.GetUserId(User);

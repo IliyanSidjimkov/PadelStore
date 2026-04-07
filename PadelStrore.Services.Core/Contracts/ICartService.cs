@@ -18,5 +18,7 @@ namespace PadelStrore.Services.Core.Contracts
         Task IncreaseQuantityAsync(Guid id);
 
         Task DecreaseQuantityAsync(Guid id);
+
+        Task<bool> IsOwnerAsync(Guid cartItemId, Guid userId);
     }
 }

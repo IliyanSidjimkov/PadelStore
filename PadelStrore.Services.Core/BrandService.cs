@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using PadelStore.Data;
 using PadelStore.Data.Models;
 using PadelStore.ViewModels.Admin;
@@ -42,10 +43,19 @@ namespace PadelStrore.Services.Core
         {
             Brand? brand = await context.Brands.FindAsync(id);
 
+
             if (brand != null)
             {
                 context.Brands.Remove(brand);
                 await context.SaveChangesAsync();
+            }
+            else {
+                throw new ArgumentException("Brand not found");
+
+            }
+            if (brand!.Id != id)
+            {
+                return;
             }
         }
 

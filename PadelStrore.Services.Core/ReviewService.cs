@@ -36,7 +36,7 @@ namespace PadelStrore.Services.Core
 
             if (review == null)
             {
-                return;
+                throw new ArgumentException("Review not found");
             }
 
             if (isAdmin || review.UserId == userId)

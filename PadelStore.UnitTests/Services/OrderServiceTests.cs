@@ -95,16 +95,7 @@ namespace PadelStore.UnitTests.Services
             order.TotalPrice.Should().Be(200); 
         }
 
-        [Fact]
-        public async Task CreateOrderAsync_ShouldDoNothing_WhenCartIsEmpty()
-        {
-            ShopDbContext context = GetDbContext();
-            OrderService service = new OrderService(context);
-
-            await service.CreateOrderAsync(Guid.NewGuid());
-
-            context.Orders.Count().Should().Be(0);
-        }
+        
 
         [Fact]
         public async Task ChangeStatusAsync_ShouldUpdateStatus()

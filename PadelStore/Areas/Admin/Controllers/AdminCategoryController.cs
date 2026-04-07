@@ -46,8 +46,16 @@ namespace PadelStore.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(Guid id)
         {
-            await categoryService.DeleteAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await categoryService.DeleteAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ArgumentException)
+            {
+                return NotFound();
+            }
+
         }
     }
 }

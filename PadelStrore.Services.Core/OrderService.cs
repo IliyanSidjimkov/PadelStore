@@ -28,6 +28,7 @@ namespace PadelStrore.Services.Core
                 order.Status = status;
                 await context.SaveChangesAsync();
             }
+            
         }
 
         public async Task CreateOrderAsync(Guid userId)
@@ -39,7 +40,7 @@ namespace PadelStrore.Services.Core
 
             if (!cartItems.Any())
             {
-                return;
+                throw new InvalidOperationException("Cart is empty");
             }
 
             Order order = new Order

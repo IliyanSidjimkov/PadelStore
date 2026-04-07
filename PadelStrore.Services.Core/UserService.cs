@@ -41,7 +41,7 @@ namespace PadelStrore.Services.Core
             
             if (userId == currentAdminId)
             {
-                return;
+                throw new InvalidOperationException("Admin cannot delete himself");
             }
 
             ApplicationUser? user = await userManager.FindByIdAsync(userId.ToString());

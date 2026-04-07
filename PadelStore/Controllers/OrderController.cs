@@ -29,9 +29,19 @@ namespace PadelStore.Controllers
                 return Unauthorized();
             }
 
-            await orderService.CreateOrderAsync(userId);
+            
+            try
+            {
+                await orderService.CreateOrderAsync(userId);
+                return View();
+            }
+            catch (InvalidOperationException)
+            {
+                TempData["Error"] = "Количката е празна!";
+                return RedirectToAction("Index", "Cart");
+            }
 
-            return View();
+            
         }
 
         public async Task<IActionResult> MyOrders()
@@ -51,6 +61,10 @@ namespace PadelStore.Controllers
 
     public async Task<IActionResult> Details(Guid id)
         {
+            if (!Guid.TryParse(userManager.GetUserId(User), out Guid userId))
+            {
+                return Unauthorized();
+            }
             OrderDetailsViewModel? order = await orderService.GetDetailsAsync(id);
 
             if (order == null)
